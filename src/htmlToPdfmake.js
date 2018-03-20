@@ -7,9 +7,9 @@ function pdfForElement(outerHTML) {
   return new Promise((resolve, reject) => {
 
     env(outerHTML, (errors, window) => {
-  
+
       if (errors) return reject(errors)
-  
+
       function ParseContainer(cnt, e, p, styles) {
         var elements = [];
         var children = e.childNodes;
@@ -21,7 +21,7 @@ function pdfForElement(outerHTML) {
         }
         return p;
       }
-  
+
       function ComputeStyle(o, styles) {
         for (var i = 0; i < styles.length; i++) {
           var st = styles[i].trim().toLowerCase().split(":");
@@ -75,7 +75,7 @@ function pdfForElement(outerHTML) {
           }
         }
       }
-  
+
       function ParseElement(cnt, e, p, styles) {
         if (!styles) styles = [];
         if (e.getAttribute) {
@@ -85,7 +85,7 @@ function pdfForElement(outerHTML) {
             for (var k = 0; k < ns.length; k++) styles.push(ns[k]);
           }
         }
-  
+
         switch (e.nodeName.toLowerCase()) {
           case "#text":
             {
@@ -117,6 +117,45 @@ function pdfForElement(outerHTML) {
               break;
               //cnt.push({ text: e.innerText, bold: false });
             }
+          case "h1":
+            {
+              p = CreateParagraph();
+              var st = {
+                stack: []
+              }
+              st.stack.push(p);
+              ComputeStyle(st, styles);
+              ParseContainer(st.stack, e, p, styles.concat(["font-size:32", "font-weight:bold"]));
+
+              cnt.push(st);
+              break;
+            }
+          case "h2":
+            {
+              p = CreateParagraph();
+              var st = {
+                stack: []
+              }
+              st.stack.push(p);
+              ComputeStyle(st, styles);
+              ParseContainer(st.stack, e, p, styles.concat(["font-size:24", "font-weight:bold"]));
+
+              cnt.push(st);
+              break;
+            }
+          case "h3":
+            {
+              p = CreateParagraph();
+              var st = {
+                stack: []
+              }
+              st.stack.push(p);
+              ComputeStyle(st, styles);
+              ParseContainer(st.stack, e, p, styles.concat(["font-size:19", "font-weight:bold"]));
+
+              cnt.push(st);
+              break;
+            }
           case "span":
             {
               ParseContainer(cnt, e, p, styles);
@@ -142,7 +181,7 @@ function pdfForElement(outerHTML) {
                 if (parseInt(border) == 1) isBorder = true;
               if (!isBorder) t.layout = 'noBorders';
               ParseContainer(t.table.body, e, p, styles);
-  
+
               var widths = e.getAttribute("widths");
               if (!widths) {
                 if (t.table.body.length != 0) {
@@ -176,12 +215,12 @@ function pdfForElement(outerHTML) {
                 stack: []
               }
               st.stack.push(p);
-  
+
               var rspan = e.getAttribute("rowspan");
               if (rspan) st.rowSpan = parseInt(rspan);
               var cspan = e.getAttribute("colspan");
               if (cspan) st.colSpan = parseInt(cspan);
-  
+
               ParseContainer(st.stack, e, p, styles);
               cnt.push(st);
               break;
@@ -196,7 +235,7 @@ function pdfForElement(outerHTML) {
               st.stack.push(p);
               ComputeStyle(st, styles);
               ParseContainer(st.stack, e, p);
-  
+
               cnt.push(st);
               break;
             }
@@ -208,13 +247,13 @@ function pdfForElement(outerHTML) {
         }
         return p;
       }
-  
+
       function ParseHtml(cnt, htmlText) {
         const html = $(htmlText.replace(/\t/g, "").replace(/\n/g, ""));
         var p = CreateParagraph();
         for (var i = 0; i < html.length; i++) ParseElement(cnt, html.get(i), p);
       }
-  
+
       function CreateParagraph() {
         var p = {
           text: []
@@ -222,13 +261,13 @@ function pdfForElement(outerHTML) {
         return p;
       }
       const content = [];
-  
+
       const $ = require('jquery')(window)
       ParseHtml(content, outerHTML);
       return resolve(content)
     })
 
-  }) 
+  })
 
 }
 
