@@ -89,4 +89,15 @@ describe('pdfForElement', () => {
 
   })
 
+  it('should parse h3', () => {
+    const html = '<h3>header 3</h3>'
+    const expected = [{"stack":[{"text":[{"text":"header 3","fontSize":19,"bold":true}]}]}]
+
+    return pdfForElement(html)
+      .then(result => {
+        expect(result).to.deep.eq(expected)
+      })
+
+  })
+
 })
