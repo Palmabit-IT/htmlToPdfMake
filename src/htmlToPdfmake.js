@@ -90,10 +90,10 @@ function pdfForElement(outerHTML) {
           case "#text":
             {
               var t = {
-                text: e.textContent.replace(/\n/g, "").trim()
+                text: e.textContent.replace(/\n/g, "")
               };
               if (styles) ComputeStyle(t, styles);
-              if (t.text) p.text.push(t);
+              /* if (t.text.trim()) */ p.text.push(t);
               break;
             }
           case "b":

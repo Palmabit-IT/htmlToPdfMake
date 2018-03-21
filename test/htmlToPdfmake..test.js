@@ -114,6 +114,9 @@ describe('pdfForElement', () => {
               "text": [
                 {
                   "text": "Coffee"
+                },
+                {
+                  "text": "                    "
                 }
               ]
             }
@@ -123,6 +126,9 @@ describe('pdfForElement', () => {
               "text": [
                 {
                   "text": "Tea"
+                },
+                {
+                  "text": "                    "
                 }
               ]
             }
@@ -132,6 +138,9 @@ describe('pdfForElement', () => {
               "text": [
                 {
                   "text": "Milk"
+                },
+                {
+                  "text": "                  "
                 }
               ]
             }
