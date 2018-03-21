@@ -90,10 +90,10 @@ function pdfForElement(outerHTML) {
           case "#text":
             {
               var t = {
-                text: e.textContent.replace(/\n/g, "")
+                text: e.textContent.replace(/\n/g, "").trim()
               };
               if (styles) ComputeStyle(t, styles);
-              p.text.push(t);
+              if (t.text) p.text.push(t);
               break;
             }
           case "b":
@@ -238,6 +238,24 @@ function pdfForElement(outerHTML) {
 
               cnt.push(st);
               break;
+            }
+          case "ul":
+            {
+              const u = {
+                ul: []
+              }
+              ParseContainer(u.ul, e, p, styles);
+              cnt.push(u)
+              break
+            }
+          case "li":
+            {
+              p = CreateParagraph();
+              var st = []
+              st.push(p);
+              ParseContainer(st, e, p, styles);
+              cnt.push(st);
+              break
             }
           default:
             {

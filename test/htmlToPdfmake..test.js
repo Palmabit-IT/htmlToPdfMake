@@ -100,4 +100,51 @@ describe('pdfForElement', () => {
 
   })
 
+  it('should parse ul', () => {
+    const html = `<ul>
+                    <li>Coffee</li>
+                    <li>Tea</li>
+                    <li>Milk</li>
+                  </ul>`
+    const expected = [
+      {
+        "ul": [
+          [
+            {
+              "text": [
+                {
+                  "text": "Coffee"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "text": [
+                {
+                  "text": "Tea"
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "text": [
+                {
+                  "text": "Milk"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+
+    return pdfForElement(html)
+      .then(result => {
+        expect(result).to.deep.eq(expected)
+      })
+
+  })
+
 })
