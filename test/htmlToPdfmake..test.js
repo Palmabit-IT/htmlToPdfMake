@@ -156,4 +156,60 @@ describe('pdfForElement', () => {
 
   })
 
+  it('should parse ol', () => {
+    const html = `<ol>
+                    <li>Coffee</li>
+                    <li>Tea</li>
+                    <li>Milk</li>
+                  </ol>`
+    const expected = [
+      {
+        "ol": [
+          [
+            {
+              "text": [
+                {
+                  "text": "Coffee"
+                },
+                {
+                  "text": "                    "
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "text": [
+                {
+                  "text": "Tea"
+                },
+                {
+                  "text": "                    "
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "text": [
+                {
+                  "text": "Milk"
+                },
+                {
+                  "text": "                  "
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+
+    return pdfForElement(html)
+      .then(result => {
+        expect(result).to.deep.eq(expected)
+      })
+
+  })
+
 })

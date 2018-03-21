@@ -248,6 +248,15 @@ function pdfForElement(outerHTML) {
               cnt.push(u)
               break
             }
+          case "ol":
+            {
+              const o = {
+                ol: []
+              }
+              ParseContainer(o.ol, e, p, styles);
+              cnt.push(o)
+              break
+            }
           case "li":
             {
               p = CreateParagraph();
