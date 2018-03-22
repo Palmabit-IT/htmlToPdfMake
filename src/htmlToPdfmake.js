@@ -164,6 +164,8 @@ function pdfForElement(outerHTML) {
           case "br":
             {
               p = CreateParagraph();
+              const newLine = { text: '\n' }
+              p.text.push(newLine)
               cnt.push(p);
               break;
             }

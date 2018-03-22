@@ -212,4 +212,13 @@ describe('pdfForElement', () => {
 
   })
 
+  it('should parse multiple row', () => {
+    const html = '<p>riga uno</p><p><br></p><p>riga due<br></p>'
+    const expected = [{"stack":[{"text":[{"text":"riga uno"}]}]},{"stack":[{"text":[]},{"text":[{"text":"\n"}]}]},{"stack":[{"text":[{"text":"riga due"}]},{"text":[{"text":"\n"}]}]}]
+    return pdfForElement(html)
+      .then(result => {
+        return expect(result).to.deep.eq(expected)
+      })
+  })
+
 })
