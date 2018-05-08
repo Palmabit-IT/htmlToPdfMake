@@ -212,9 +212,9 @@ describe('pdfForElement', () => {
 
   })
 
-  it('should parse ol', () => {
-    const html = `<small>text</small>`
-    const expected = [{"stack":[{"text":[{"text":"text","fontSize":6}]}]}]
+  it('should parse small', () => {
+    const html = `<p>big<small>text</small></p>`
+    const expected = [{"stack":[{"text":[{"text":"big"},{"text":"text","fontSize":6}]}]}]
 
     return pdfForElement(html)
       .then(result => {

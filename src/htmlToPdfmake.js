@@ -270,15 +270,7 @@ function pdfForElement(outerHTML) {
             }
           case "small":
             {
-              p = CreateParagraph();
-              var st = {
-                stack: []
-              }
-              st.stack.push(p);
-              ComputeStyle(st, styles);
-              ParseContainer(st.stack, e, p, styles.concat(["font-size:6"]));
-
-              cnt.push(st);
+              ParseContainer(cnt, e, p, styles.concat(["font-size:6"]));
               break;
             }
           default:
