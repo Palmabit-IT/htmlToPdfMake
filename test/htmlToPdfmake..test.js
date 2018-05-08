@@ -212,6 +212,17 @@ describe('pdfForElement', () => {
 
   })
 
+  it('should parse ol', () => {
+    const html = `<small>text</small>`
+    const expected = [{"stack":[{"text":[{"text":"text","fontSize":6}]}]}]
+
+    return pdfForElement(html)
+      .then(result => {
+        expect(result).to.deep.eq(expected)
+      })
+
+  })
+
   it('should parse multiple row', () => {
     const html = '<p>riga uno</p><p><br></p><p>riga due<br></p>'
     const expected = [{"stack":[{"text":[{"text":"riga uno"}]}]},{"stack":[{"text":[]},{"text":[{"text":"\n"}]}]},{"stack":[{"text":[{"text":"riga due"}]},{"text":[{"text":"\n"}]}]}]

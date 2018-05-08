@@ -268,6 +268,19 @@ function pdfForElement(outerHTML) {
               cnt.push(st);
               break
             }
+          case "small":
+            {
+              p = CreateParagraph();
+              var st = {
+                stack: []
+              }
+              st.stack.push(p);
+              ComputeStyle(st, styles);
+              ParseContainer(st.stack, e, p, styles.concat(["font-size:6"]));
+
+              cnt.push(st);
+              break;
+            }
           default:
             {
               console.log("Parsing for node " + e.nodeName + " not found");
