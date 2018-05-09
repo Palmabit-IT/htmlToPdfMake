@@ -268,6 +268,7 @@ function pdfForElement(outerHTML) {
               cnt.push(st);
               break
             }
+          case "sub":
           case "small":
             {
               ParseContainer(cnt, e, p, styles.concat(["font-size:6"]));
