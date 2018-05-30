@@ -1,5 +1,5 @@
 {
-  "name": "htmltopdfmake",
+  "name": "@palmabit/htmltopdfmake",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,11 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://emanueleliardo@bitbucket.org/palmabit/htmltopdfmake.git"
+    "url": "git+https://github.com/Palmabit-IT/htmltopdfmake.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/palmabit/htmltopdfmake#readme",
+  "homepage": "https://github.com/Palmabit-IT#readme",
   "dependencies": {
     "jquery": "^3.3.1",
     "jsdom": "^3.1.2"
