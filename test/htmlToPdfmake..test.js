@@ -49,54 +49,44 @@ describe('pdfForElement', () => {
       }
     ]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse h1', () => {
     const html = `<div><h1>header1</h1></div>`
-    const expected = [{"stack":[{"text":[]},{"stack":[{"text":[{"text":"header1","fontSize":32,"bold":true}]}]}]}]
+    const expected = [{ "stack": [{ "text": [] }, { "stack": [{ "text": [{ "text": "header1", "fontSize": 32, "bold": true }] }] }] }]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse h2', () => {
     const html = `<div><h2>header2</h2></div>`
-    const expected = [{"stack":[{"text":[]},{"stack":[{"text":[{"text":"header2","fontSize":24,"bold":true}]}]}]}]
+    const expected = [{ "stack": [{ "text": [] }, { "stack": [{ "text": [{ "text": "header2", "fontSize": 24, "bold": true }] }] }] }]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse h3', () => {
     const html = `<div><h3>header3</h3></div>`
-    const expected = [{"stack":[{"text":[]},{"stack":[{"text":[{"text":"header3","fontSize":19,"bold":true}]}]}]}]
+    const expected = [{ "stack": [{ "text": [] }, { "stack": [{ "text": [{ "text": "header3", "fontSize": 19, "bold": true }] }] }] }]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse h3', () => {
     const html = '<h3>header 3</h3>'
-    const expected = [{"stack":[{"text":[{"text":"header 3","fontSize":19,"bold":true}]}]}]
+    const expected = [{ "stack": [{ "text": [{ "text": "header 3", "fontSize": 19, "bold": true }] }] }]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
@@ -149,10 +139,8 @@ describe('pdfForElement', () => {
       }
     ]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
@@ -205,31 +193,33 @@ describe('pdfForElement', () => {
       }
     ]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse small', () => {
     const html = `<p>big<small>text</small></p>`
-    const expected = [{"stack":[{"text":[{"text":"big"},{"text":"text","fontSize":6}]}]}]
+    const expected = [{ "stack": [{ "text": [{ "text": "big" }, { "text": "text", "fontSize": 6 }] }] }]
 
-    return pdfForElement(html)
-      .then(result => {
-        expect(result).to.deep.eq(expected)
-      })
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
 
   })
 
   it('should parse multiple row', () => {
     const html = '<p>riga uno</p><p><br></p><p>riga due<br></p>'
-    const expected = [{"stack":[{"text":[{"text":"riga uno"}]}]},{"stack":[{"text":[]},{"text":[{"text":"\n"}]}]},{"stack":[{"text":[{"text":"riga due"}]},{"text":[{"text":"\n"}]}]}]
-    return pdfForElement(html)
-      .then(result => {
-        return expect(result).to.deep.eq(expected)
-      })
+    const expected = [{ "stack": [{ "text": [{ "text": "riga uno" }] }] }, { "stack": [{ "text": [] }, { "text": [{ "text": "\n" }] }] }, { "stack": [{ "text": [{ "text": "riga due" }] }, { "text": [{ "text": "\n" }] }] }]
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
+  })
+
+  it('should parse font-size style', () => {
+    const html = '<p style="font-size:14">normale</p>'
+    const expected = [{ "fontSize": 14, "stack": [{ "text": [{ "text": "normale" }] }] }]
+
+    const result = pdfForElement(html)
+    expect(result).to.deep.eq(expected)
   })
 
 })
